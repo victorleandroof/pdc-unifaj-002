@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <title>Jogo Adivinha Idade</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="/assets/style.css">
+</head>
+
+<body>
+    <section class="demo">
+        <div class="header">
+            <h4 id="equcacao">
+                <%=equacao.equacao_first%><br>
+                <%=equacao.equacao_second%>
+            </h4>
+        </div>
+        <br><br>
+        <div class="container cards">
+            <div class="column">
+                <div class="card">
+                    <div class="card_content">
+                        <center>
+                            <img src="<%=equacao.img_correct%>"  id="img_1"/>
+                            <a class="card_button btn" href="#" data-final="<%=final%>" data-fase="<%=index%>" data-escolha="1" role="button">Escolher</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card_content">
+                        <center>
+                            <img src="<%=equacao.img_incorrect%>"  id="img_2"/>
+                            <a class="card_button btn" href="#" data-final="<%=final%>" data-fase="<%=index%>" data-escolha="2" role="button">Escolher</a>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </section>
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready((ev) => {
+        $('.btn').on('click',(e)=>{
+            e.preventDefault();
+            let $this = $(e.target);
+            let dataFinal = $this.data('final');
+            let dataEscolha = $this.data('escolha');
+            let dataFase = $this.data('fase');
+            let escolhas = JSON.parse(localStorage.getItem('escolhas')) || [];
+            if(escolhas[dataFase-1]){
+                alert('HMMM Você ja escolheu');
+            }else if(dataFinal){
+                let acertos = "";
+                escolhas[dataFase-1] = dataEscolha;
+                $.each(escolhas,(k,v)=>{
+                   if(v === 1) acertos += `${k+1} acertou \n`;
+                   else acertos += `${k+1} errou \n`;
+                });
+                window.alert(acertos);
+                localStorage.removeItem('escolhas');
+                window.location.replace('/fase/1');
+            }else {
+                escolhas[dataFase-1] = dataEscolha;
+                localStorage.setItem('escolhas',JSON.stringify(escolhas));
+                window.location.replace(`/fase/${dataFase+1}`);
+            }
+        });
+    })
+</script>
+
+</html>

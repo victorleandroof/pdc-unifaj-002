@@ -1,0 +1,20 @@
+[
+    {
+        "equacao_first":"3x+4y=11",
+        "equacao_second":"2x-4y=-6",
+        "img_correct":"/assets/imgs/img01.gif",
+        "img_incorrect":"/assets/imgs/img02.gif"
+    },
+    {
+        "equacao_first":"6x+4y=-12",
+        "equacao_second":"2x-4y=10",
+        "img_correct":"/assets/imgs/img02.gif",
+        "img_incorrect":"/assets/imgs/img03.gif"
+    },
+    {
+        "equacao_first":"1x+3y=2",
+        "equacao_second":"2x-4y=1",
+        "img_correct":"/assets/imgs/img03.gif",
+        "img_incorrect":"/assets/imgs/img01.gif"
+    }
+]
